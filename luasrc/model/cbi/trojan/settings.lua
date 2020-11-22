@@ -58,8 +58,12 @@ o = s:option(ListValue, "dns_mode", translate("DNS Query Mode"))
 --o.widget  = "radio"
 o.orientation = "horizontal"
 o:value("off", translate("Disabled"))
+if nixio.fs.access("/usr/sbin/dnscrypt-proxy") then
 o:value("dnscrypt", translate("DNSCrypt"))
+end
+if nixio.fs.access("/usr/sbin/pdnsd") then
 o:value("pdnsd", translate("Pdnsd"))
+end
 o.description = translate("DNS Query Mode")
 o.default = "dnscrypt"
 o.rmempty = false
@@ -70,8 +74,6 @@ o:value("8.8.8.8:53", translate("Google Public DNS (8.8.8.8)"))
 o:value("208.67.222.222:53", translate("OpenDNS (208.67.222.222)"))
 o:value("208.67.220.220:53", translate("OpenDNS (208.67.220.220)"))
 o:value("1.1.1.1:53", translate("Cloudflare DNS (1.1.1.1)"))
-o:value("114.114.114.114:53", translate("Oversea Mode DNS-1 (114.114.114.114)"))
-o:value("114.114.115.115:53", translate("Oversea Mode DNS-2 (114.114.115.115)"))
 o:depends("dns_mode", "pdnsd")
 
 if fs.access(res_input) then
