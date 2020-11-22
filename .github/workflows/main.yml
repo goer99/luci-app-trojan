@@ -1,7 +1,7 @@
 on:
   push:
     branches: 
-      - master
+      - no_pdnsd_dep
 
 name: luci-app-trojan
 jobs:
